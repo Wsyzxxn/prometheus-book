@@ -14,6 +14,8 @@ Prometheus的本地存储给Prometheus带来了简单高效的使用体验，可
 
 基本的HA模式只能确保Promthues服务的可用性问题，但是不解决Prometheus Server之间的数据一致性问题以及持久化问题(数据丢失后无法恢复)，也无法进行动态的扩展。因此这种部署方式适合监控规模不大，Promthues Server也不会频繁发生迁移的情况，并且只需要保存短周期监控数据的场景。
 
+目前我们的Prometheus Server 因存在pushgateway监控问题，Promserver Server 需仔细划分
+
 ## 基本HA + 远程存储
 
 在基本HA模式的基础上通过添加Remote Storage存储支持，将监控数据保存在第三方存储服务上。
