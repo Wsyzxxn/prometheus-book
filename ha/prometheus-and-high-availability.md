@@ -14,7 +14,7 @@ Prometheus的本地存储给Prometheus带来了简单高效的使用体验，可
 
 基本的HA模式只能确保Promthues服务的可用性问题，但是不解决Prometheus Server之间的数据一致性问题以及持久化问题(数据丢失后无法恢复)，也无法进行动态的扩展。因此这种部署方式适合监控规模不大，Promthues Server也不会频繁发生迁移的情况，并且只需要保存短周期监控数据的场景。
 
-目前我们的Prometheus Server 因存在pushgateway监控问题，Promserver Server 需仔细划分
+宋恩杰： 目前我们的Prometheus Server 因存在pushgateway监控问题，Promserver Server 需仔细划分
 
 ## 基本HA + 远程存储
 
@@ -23,6 +23,8 @@ Prometheus的本地存储给Prometheus带来了简单高效的使用体验，可
 ![HA + Remote Storage](./static/prometheus-ha-remote-storage.png)
 
 在解决了Promthues服务可用性的基础上，同时确保了数据的持久化，当Promthues Server发生宕机或者数据丢失的情况下，可以快速的恢复。 同时Promthues Server可能很好的进行迁移。因此，该方案适用于用户监控规模不大，但是希望能够将监控数据持久化，同时能够确保Promthues Server的可迁移性的场景。
+
+宋恩杰： 远程存储，我们已经做到
 
 ## 基本HA + 远程存储 + 联邦集群
 
@@ -47,6 +49,8 @@ Prometheus的本地存储给Prometheus带来了简单高效的使用体验，可
 ![实例级别功能分区](./static/promethues-sharding-targets.png)
 
 如上图所示，将统一任务的不同实例的监控数据采集任务划分到不同的Prometheus实例。通过relabel设置，我们可以确保当前Prometheus Server只收集当前采集任务的一部分实例的监控指标。
+
+宋恩杰: federate 这种模式，如果已经给prometheus 做了定量处理，那么federate模式已经没有必要存在了
 
 ```
 global:
